@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Great Number Game!</h1>
+        <h3> I am thinking of a number between 1 and 100
+            <br>
+            <p>Take a guess!</p>
+        </h3>
+
+        <form action="/process" method="post">
+            {% if session['number'] %}
+                {% if session['number'] < randomNumber %}
+                    <p style="color:red"> too low </p>
+                {% elif session['number'] > randomNumber %}
+                    <p style="color:green"> too high </p>
+                {% elif session['number'] == randomNumber %}
+                    <p> {{session['number']}} was the number! </p>
+                    <p>Lets goooo</p>
+                {% endif %}
+            {% endif %}
+            <label for="number"></label>
+            <input type="text" name="number" id="number">
+            <button class="btn btn-primary">Submit</button>
+        </form>
+</div>
+</body>
+</html>
